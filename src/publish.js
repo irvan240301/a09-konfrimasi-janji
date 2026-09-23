@@ -1,4 +1,3 @@
-require('dotenv').config();
 const amqp = require('amqplib');
 const fs   = require('fs');
 const path = require('path');

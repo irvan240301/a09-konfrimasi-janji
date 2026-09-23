@@ -7,10 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-  "worker":   "node src/worker.js",
-  "publish":  "node src/publish.js",
-  "db:reset": "docker exec -i a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""
-},
+    "worker": "node --env-file=.env src/worker.js",
+    "publish": "node --env-file=.env src/publish.js",
+    "db:reset": "docker exec -it a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/irvan240301/a09-konfrimasi-janji.git"
@@ -25,7 +25,6 @@
   "homepage": "https://github.com/irvan240301/a09-konfrimasi-janji#readme",
   "dependencies": {
     "amqplib": "^2.0.1",
-    "dotenv": "^18.0.3",
     "pg": "^8.23.0"
   }
 }

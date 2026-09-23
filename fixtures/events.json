@@ -28,6 +28,13 @@
     {"event_id":"run01-G04","event_type":"appointment.booked","occurred_at":"2026-09-23T02:03:00Z","payload":{"appointment_id":"APT-024","customer_id":"CUS-024","slot":"2026-10-01T15:00:00+07:00"}},
     {"event_id":"run01-G05","event_type":"appointment.booked","occurred_at":"2026-09-23T02:04:00Z","payload":{"appointment_id":"APT-025","customer_id":"CUS-025","slot":"2026-10-02T09:00:00+07:00"}}
   ],
+  "replay": [
+    {"event_id":"run01-N01","event_type":"appointment.booked","occurred_at":"2026-09-23T01:00:00Z","payload":{"appointment_id":"APT-001","customer_id":"CUS-001","slot":"2026-09-28T09:00:00+07:00"}},
+    {"event_id":"run01-N02","event_type":"appointment.booked","occurred_at":"2026-09-23T01:01:00Z","payload":{"appointment_id":"APT-002","customer_id":"CUS-002","slot":"2026-09-28T10:00:00+07:00"}},
+    {"event_id":"run01-N03","event_type":"appointment.booked","occurred_at":"2026-09-23T01:02:00Z","payload":{"appointment_id":"APT-003","customer_id":"CUS-003","slot":"2026-09-28T11:00:00+07:00"}},
+    {"event_id":"run01-N04","event_type":"appointment.booked","occurred_at":"2026-09-23T01:03:00Z","payload":{"appointment_id":"APT-004","customer_id":"CUS-004","slot":"2026-09-28T13:00:00+07:00"}},
+    {"event_id":"run01-N05","event_type":"appointment.booked","occurred_at":"2026-09-23T01:04:00Z","payload":{"appointment_id":"APT-005","customer_id":"CUS-005","slot":"2026-09-28T14:00:00+07:00"}}
+  ],
   "invalid": [
     {"event_id":"run01-X01","event_type":"appointment.booked","occurred_at":"2026-09-23T03:00:00Z","payload":{"customer_id":"CUS-099","slot":"2026-10-02T10:00:00+07:00"}}
   ],

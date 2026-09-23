@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { Pool } = require('pg');
 
 // Konstanta topology A09 — harus konsisten di producer dan worker

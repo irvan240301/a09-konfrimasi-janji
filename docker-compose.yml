@@ -1,0 +1,29 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: a09-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: a09user
+      RABBITMQ_DEFAULT_PASS: a09pass
+      RABBITMQ_DEFAULT_VHOST: a09vhost
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: a09-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: a09db
+      POSTGRES_USER: a09user
+      POSTGRES_PASSWORD: a09pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  rabbitmq_data:
+  postgres_data:

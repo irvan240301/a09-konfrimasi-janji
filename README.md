@@ -150,6 +150,44 @@ npm run publish invalid
 npm run publish valid_setelah_invalid
 ```
 
+## Merekam Evidence
+
+Folder `evidence/` diisi otomatis, dikelompokkan per uji:
+
+| File | Dibuat oleh | Isi |
+|------|-------------|-----|
+| `evidence/<uji>/input-<kategori>.json` | setiap publish (dashboard maupun CLI) | daftar `event_id` yang dikirim, perintah, waktu |
+| `evidence/<uji>/hasil[-<tahap>].json` | `npm run hasil -- <uji> [tahap]` | isi tabel receipts/rejected, status queue (ready/unacked/consumers), perbandingan ID diharapkan vs aktual |
+| `evidence/worker.log` | `npm run worker` dengan `Tee-Object` | log worker |
+
+Urutan perekaman (jalankan `hasil` setelah tiap uji selesai):
+
+```powershell
+# Terminal 1 — worker, log tampil sekaligus tersimpan
+npm run worker | Tee-Object -FilePath evidence/worker.log
+
+# U1: klik "Kirim N01–N20", lalu
+npm run hasil -- U1
+
+# U2: rekam tiga tahap
+npm run hasil -- U2 sebelum-gangguan     # worker masih hidup, sebelum G01–G05
+# matikan worker, klik "Kirim G01–G05"
+npm run hasil -- U2 saat-tertahan        # harus terlihat ready=5, consumers=0
+# hidupkan worker lagi
+npm run hasil -- U2 sesudah-pemulihan    # 25 receipt
+
+# U3: klik "Replay N01–N05", lalu
+npm run hasil -- U3
+
+# U4: klik "Kirim X01" dan "Kirim V01", lalu
+npm run hasil -- U4
+```
+
+`hasil` selesai dengan exit code 1 bila himpunan ID tidak sesuai target, dan
+hanya membaca database (tidak mengubah data). Publish ulang kategori yang sama
+menimpa `input-<kategori>.json` sebelumnya, jadi rekam evidence dari satu
+rangkaian uji yang bersih (klik "Reset DB" dulu).
+
 ## Cara Memeriksa Hasil
 
 Cara tercepat: lihat langsung tabel **Receipts** dan **Rejected** di

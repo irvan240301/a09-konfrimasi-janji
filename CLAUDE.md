@@ -31,6 +31,9 @@ src/
   producers/producer.js — CLI publish single-event
   producers/publish.js  — CLI publish batch by kategori
   api/server.js         — Express API + trigger publish untuk dashboard
+  lib/evidence.js       — tulis input-<kategori>.json ke evidence/<uji>/
+  lib/queue-status.js   — status queue via RabbitMQ Management API (dipakai server + hasil)
+  tools/hasil.js        — npm run hasil -- <uji> [tahap]: snapshot DB + queue + perbandingan ID
 public/
   index.html            — dashboard statis
 ```

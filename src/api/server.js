@@ -8,8 +8,11 @@ const {
   EXCHANGE,
   ROUTING_KEY,
   EXCHANGE_TYPE,
+  RUN_ID,
   pool,
 } = require('../config');
+const { getQueueStatus } = require('../lib/queue-status');
+const { saveInputIds }   = require('../lib/evidence');
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,14 +21,6 @@ const fixtures = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../../fixtures/events.json'), 'utf8')
 );
 const KATEGORI_VALID = Object.keys(fixtures);
-
-// Kredensial Management API diturunkan dari RABBITMQ_URL — tidak hardcode ulang
-const amqpUrl  = new URL(RABBITMQ_URL);
-const MGMT_URL = `http://${amqpUrl.hostname}:15672`;
-const MGMT_AUTH = 'Basic ' + Buffer.from(
-  `${decodeURIComponent(amqpUrl.username)}:${decodeURIComponent(amqpUrl.password)}`
-).toString('base64');
-const VHOST = encodeURIComponent(amqpUrl.pathname.slice(1) || '/');
 
 const app = express();
 app.use(cors());
@@ -61,6 +56,14 @@ app.post('/api/publish/:kategori', async (req, res) => {
       await ch.waitForConfirms();
       published.push(event.event_id);
     }
+
+    saveInputIds({
+      kategori,
+      eventIds: published,
+      source:   'api',
+      command:  `POST /api/publish/${kategori}`,
+      runId:    RUN_ID,
+    });
 
     res.json({ kategori, count: published.length, event_ids: published });
   } catch (err) {
@@ -102,20 +105,7 @@ app.get('/api/rejected', async (req, res) => {
 // GET /api/queue-status — status queue "confirmations" via RabbitMQ Management API
 app.get('/api/queue-status', async (req, res) => {
   try {
-    const response = await fetch(
-      `${MGMT_URL}/api/queues/${VHOST}/confirmations`,
-      { headers: { Authorization: MGMT_AUTH } }
-    );
-    if (!response.ok) {
-      throw new Error(`Management API status ${response.status}`);
-    }
-    const data = await response.json();
-    res.json({
-      ready:     data.messages_ready ?? 0,
-      unacked:   data.messages_unacknowledged ?? 0,
-      total:     data.messages ?? 0,
-      consumers: data.consumers ?? 0,
-    });
+    res.json(await getQueueStatus());
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -6,7 +6,9 @@ const {
   EXCHANGE,
   ROUTING_KEY,
   EXCHANGE_TYPE,
+  RUN_ID,
 } = require('../config');
+const { saveInputIds } = require('../lib/evidence');
 
 // Baca fixtures
 const fixtures = JSON.parse(
@@ -46,7 +48,16 @@ async function publishAll(events) {
       console.log(`✓ Published: ${event.event_id}`);
     }
 
+    const file = saveInputIds({
+      kategori,
+      eventIds: events.map((e) => e.event_id),
+      source:   'cli',
+      command:  `npm run publish ${kategori}`,
+      runId:    RUN_ID,
+    });
+
     console.log(`\nSelesai: ${events.length} event dipublish dari kategori "${kategori}"`);
+    if (file) console.log(`Evidence input: ${path.relative(process.cwd(), file)}`);
   } catch (err) {
     console.error('Gagal:', err.message);
     process.exit(1);

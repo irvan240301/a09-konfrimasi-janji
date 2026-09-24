@@ -50,8 +50,6 @@ public/
 ### Belum dikerjakan (sebelum presentasi):
 - [ ] docs/diagram-a09.svg — diagram arsitektur satu halaman
 - [ ] docs/laporan.md — laporan 3-5 halaman (masalah, desain, hasil U1-U4, 1 diagnosis gangguan, batas prototipe, kontribusi)
-- [ ] evidence/ — isi bukti per uji (input, output, log, observasi broker)
-- [ ] README.md — tambah bagian kontribusi anggota + catatan penggunaan AI (wajib resmi, halaman 8 panduan capstone)
 - [ ] Slide presentasi (maksimum 5 slide)
 
 ---
@@ -251,6 +249,6 @@ buka http://localhost:3000
 2. Jangan sarankan deployment produksi, Kubernetes, cluster HA, atau dua broker.
 3. Kalau ada yang ambigu, tanya 1 pertanyaan singkat dulu.
 4. Setiap perubahan kode → ingatkan untuk `git add . && git commit && git push`.
-5. Prioritas sekarang: docs/laporan.md, docs/diagram-a09.svg, isi evidence/, catatan AI di README.
-6. Catat penggunaan AI di README — ini wajib resmi (panduan capstone halaman 8), belum ada.
+5. Prioritas sekarang: docs/laporan.md, docs/diagram-a09.svg, slide.
+6. Penggunaan AI sudah dicatat di README (bagian "Penggunaan Alat AI dan Referensi") — perbarui bila ada pekerjaan AI baru.
 7. src/consumers/worker.js TIDAK BOLEH diubah — logika idempotency sudah terbukti benar.

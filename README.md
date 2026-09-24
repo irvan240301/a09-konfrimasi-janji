@@ -174,7 +174,7 @@ Folder `evidence/` diisi otomatis, dikelompokkan per uji:
 |------|-------------|-----|
 | `evidence/<uji>/input-<kategori>.json` | setiap publish (dashboard maupun CLI) | daftar `event_id` yang dikirim, perintah, waktu |
 | `evidence/<uji>/hasil[-<tahap>].json` | tombol **Rekam** di dashboard **atau** `npm run hasil -- <uji> [tahap]` (hasilnya identik) | isi tabel receipts/rejected, status queue (ready/unacked/consumers), perbandingan ID diharapkan vs aktual |
-| `evidence/worker.log` | `npm run worker` dengan `Tee-Object` | log worker |
+| `evidence/worker-sesi1.log`, `worker-sesi2.log` | `npm run worker` dengan `Tee-Object` | log worker; sesi 1 = sampai worker dimatikan di U2, sesi 2 = setelah dihidupkan lagi |
 
 Ada dua cara merekam hasil, pilih salah satu atau campur:
 
@@ -186,7 +186,8 @@ Urutan perekaman dengan CLI (jalankan `hasil` setelah tiap uji selesai):
 
 ```powershell
 # Terminal 1 — worker, log tampil sekaligus tersimpan
-npm run worker | Tee-Object -FilePath evidence/worker.log
+npm run worker 2>&1 | Tee-Object -FilePath evidence/worker-sesi1.log
+# (setelah worker dimatikan di U2 dan dihidupkan lagi, pakai worker-sesi2.log)
 
 # U1: klik "Kirim N01–N20", lalu
 npm run hasil -- U1

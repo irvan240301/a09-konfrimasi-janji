@@ -4,7 +4,7 @@
   "run_id": "run01",
   "source": "otomatis",
   "command": "rekam otomatis oleh server setelah publish",
-  "captured_at": "2026-09-24T12:58:34.298Z",
+  "captured_at": "2026-09-24T14:57:43.208Z",
   "queue": {
     "ready": 0,
     "unacked": 0,
@@ -12,209 +12,8 @@
     "consumers": 1
   },
   "receipts": {
-    "count": 20,
-    "rows": [
-      {
-        "event_id": "run01-N01",
-        "appointment_id": "APT-001",
-        "customer_id": "CUS-001",
-        "slot": "2026-09-28T09:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:00:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.062Z"
-      },
-      {
-        "event_id": "run01-N02",
-        "appointment_id": "APT-002",
-        "customer_id": "CUS-002",
-        "slot": "2026-09-28T10:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:01:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.071Z"
-      },
-      {
-        "event_id": "run01-N03",
-        "appointment_id": "APT-003",
-        "customer_id": "CUS-003",
-        "slot": "2026-09-28T11:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:02:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.079Z"
-      },
-      {
-        "event_id": "run01-N04",
-        "appointment_id": "APT-004",
-        "customer_id": "CUS-004",
-        "slot": "2026-09-28T13:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:03:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.084Z"
-      },
-      {
-        "event_id": "run01-N05",
-        "appointment_id": "APT-005",
-        "customer_id": "CUS-005",
-        "slot": "2026-09-28T14:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:04:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.090Z"
-      },
-      {
-        "event_id": "run01-N06",
-        "appointment_id": "APT-006",
-        "customer_id": "CUS-006",
-        "slot": "2026-09-28T15:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:05:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.098Z"
-      },
-      {
-        "event_id": "run01-N07",
-        "appointment_id": "APT-007",
-        "customer_id": "CUS-007",
-        "slot": "2026-09-29T09:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:06:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.105Z"
-      },
-      {
-        "event_id": "run01-N08",
-        "appointment_id": "APT-008",
-        "customer_id": "CUS-008",
-        "slot": "2026-09-29T10:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:07:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.120Z"
-      },
-      {
-        "event_id": "run01-N09",
-        "appointment_id": "APT-009",
-        "customer_id": "CUS-009",
-        "slot": "2026-09-29T11:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:08:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.127Z"
-      },
-      {
-        "event_id": "run01-N10",
-        "appointment_id": "APT-010",
-        "customer_id": "CUS-010",
-        "slot": "2026-09-29T13:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:09:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.137Z"
-      },
-      {
-        "event_id": "run01-N11",
-        "appointment_id": "APT-011",
-        "customer_id": "CUS-011",
-        "slot": "2026-09-29T14:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:10:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.143Z"
-      },
-      {
-        "event_id": "run01-N12",
-        "appointment_id": "APT-012",
-        "customer_id": "CUS-012",
-        "slot": "2026-09-29T15:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:11:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.155Z"
-      },
-      {
-        "event_id": "run01-N13",
-        "appointment_id": "APT-013",
-        "customer_id": "CUS-013",
-        "slot": "2026-09-30T09:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:12:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.164Z"
-      },
-      {
-        "event_id": "run01-N14",
-        "appointment_id": "APT-014",
-        "customer_id": "CUS-014",
-        "slot": "2026-09-30T10:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:13:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.170Z"
-      },
-      {
-        "event_id": "run01-N15",
-        "appointment_id": "APT-015",
-        "customer_id": "CUS-015",
-        "slot": "2026-09-30T11:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:14:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.174Z"
-      },
-      {
-        "event_id": "run01-N16",
-        "appointment_id": "APT-016",
-        "customer_id": "CUS-016",
-        "slot": "2026-09-30T13:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:15:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.179Z"
-      },
-      {
-        "event_id": "run01-N17",
-        "appointment_id": "APT-017",
-        "customer_id": "CUS-017",
-        "slot": "2026-09-30T14:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:16:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.182Z"
-      },
-      {
-        "event_id": "run01-N18",
-        "appointment_id": "APT-018",
-        "customer_id": "CUS-018",
-        "slot": "2026-09-30T15:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:17:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.187Z"
-      },
-      {
-        "event_id": "run01-N19",
-        "appointment_id": "APT-019",
-        "customer_id": "CUS-019",
-        "slot": "2026-10-01T09:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:18:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.191Z"
-      },
-      {
-        "event_id": "run01-N20",
-        "appointment_id": "APT-020",
-        "customer_id": "CUS-020",
-        "slot": "2026-10-01T10:00:00+07:00",
-        "status": "CONFIRMED_SIMULATION",
-        "run_id": "run01",
-        "occurred_at": "2026-09-23T01:19:00.000Z",
-        "processed_at": "2026-09-24T12:58:28.195Z"
-      }
-    ]
+    "count": 0,
+    "rows": []
   },
   "rejected": {
     "count": 0,
@@ -223,10 +22,31 @@
   "perbandingan_id": {
     "receipts": {
       "diharapkan": 20,
-      "aktual": 20,
-      "hilang": [],
+      "aktual": 0,
+      "hilang": [
+        "run01-N01",
+        "run01-N02",
+        "run01-N03",
+        "run01-N04",
+        "run01-N05",
+        "run01-N06",
+        "run01-N07",
+        "run01-N08",
+        "run01-N09",
+        "run01-N10",
+        "run01-N11",
+        "run01-N12",
+        "run01-N13",
+        "run01-N14",
+        "run01-N15",
+        "run01-N16",
+        "run01-N17",
+        "run01-N18",
+        "run01-N19",
+        "run01-N20"
+      ],
       "tak_diduga": [],
-      "sesuai": true
+      "sesuai": false
     },
     "rejected": {
       "diharapkan": 0,

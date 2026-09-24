@@ -177,7 +177,7 @@ Empat bagian UI:
 ### 4. Dependency (sudah terpasang)
 
 ```bash
-npm install express cors
+npm install express
 ```
 
 ---

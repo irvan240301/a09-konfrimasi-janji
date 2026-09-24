@@ -51,7 +51,7 @@ function bandingkan(diharapkan, aktual) {
 // Ambil snapshot receipts/rejected/queue, bandingkan dengan ID yang diharapkan,
 // lalu simpan ke evidence/<uji>/hasil[-<tahap>].json. Hanya membaca database.
 async function rekamHasil(uji, tahap, source = 'cli') {
-  if (!EXPECTED[uji]) {
+  if (!Object.hasOwn(EXPECTED, uji)) {
     throw inputSalah(`Uji tidak dikenal. Pilihan: ${Object.keys(EXPECTED).join(' | ')}`);
   }
   if (tahap && !TAHAP_VALID.test(tahap)) {

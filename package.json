@@ -1,10 +1,7 @@
 {
   "name": "a09-konfirmasi-janji",
   "version": "1.0.0",
-  "description": "",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "A09 Konfirmasi Janji Layanan — capstone message broker (pola Worker: RabbitMQ + PostgreSQL)",
   "scripts": {
     "start": "node --env-file=.env src/api/server.js",
     "worker": "node --env-file=.env src/consumers/worker.js",
@@ -17,8 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/irvan240301/a09-konfrimasi-janji.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
@@ -27,7 +22,6 @@
   "homepage": "https://github.com/irvan240301/a09-konfrimasi-janji#readme",
   "dependencies": {
     "amqplib": "^2.0.1",
-    "cors": "^2.8.6",
     "express": "^5.2.1",
     "pg": "^8.23.0"
   }

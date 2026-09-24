@@ -98,7 +98,6 @@ function buatPerekam({ rekam = rekamHasil, status = getQueueStatus, konfig = {} 
 const perekam = buatPerekam();
 
 module.exports = {
-  buatPerekam,
   sebelumPublish:  perekam.sebelumPublish,
   mulaiPemantauan: perekam.mulaiPemantauan,
   ambilRiwayat:    perekam.ambilRiwayat,

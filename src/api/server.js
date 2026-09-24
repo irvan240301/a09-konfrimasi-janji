@@ -1,5 +1,4 @@
 const express = require('express');
-const cors    = require('cors');
 const path    = require('path');
 const { RUN_ID, pool } = require('../config');
 const { getQueueStatus } = require('../lib/queue-status');
@@ -11,8 +10,6 @@ const { KATEGORI, buatEvents } = require('../lib/events');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 app.use(express.static(path.join(__dirname, '../../public')));
 
 // POST /api/publish/:kategori — bangkitkan dan publish event uji kategori terkait

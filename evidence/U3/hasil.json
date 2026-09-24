@@ -4,7 +4,7 @@
   "run_id": "run01",
   "source": "otomatis",
   "command": "rekam otomatis oleh server setelah publish",
-  "captured_at": "2026-09-24T11:10:15.322Z",
+  "captured_at": "2026-09-24T11:17:58.185Z",
   "queue": {
     "ready": 0,
     "unacked": 0,
@@ -22,7 +22,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T02:00:00.000Z",
-        "processed_at": "2026-09-24T11:09:08.541Z"
+        "processed_at": "2026-09-24T11:17:39.827Z"
       },
       {
         "event_id": "run01-G02",
@@ -32,7 +32,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T02:01:00.000Z",
-        "processed_at": "2026-09-24T11:09:08.547Z"
+        "processed_at": "2026-09-24T11:17:39.835Z"
       },
       {
         "event_id": "run01-G03",
@@ -42,7 +42,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T02:02:00.000Z",
-        "processed_at": "2026-09-24T11:09:08.553Z"
+        "processed_at": "2026-09-24T11:17:39.840Z"
       },
       {
         "event_id": "run01-G04",
@@ -52,7 +52,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T02:03:00.000Z",
-        "processed_at": "2026-09-24T11:09:08.560Z"
+        "processed_at": "2026-09-24T11:17:39.845Z"
       },
       {
         "event_id": "run01-G05",
@@ -62,7 +62,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T02:04:00.000Z",
-        "processed_at": "2026-09-24T11:09:08.566Z"
+        "processed_at": "2026-09-24T11:17:39.850Z"
       },
       {
         "event_id": "run01-N01",
@@ -72,7 +72,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:00:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.693Z"
+        "processed_at": "2026-09-24T11:17:05.613Z"
       },
       {
         "event_id": "run01-N02",
@@ -82,7 +82,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:01:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.705Z"
+        "processed_at": "2026-09-24T11:17:05.627Z"
       },
       {
         "event_id": "run01-N03",
@@ -92,7 +92,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:02:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.709Z"
+        "processed_at": "2026-09-24T11:17:05.630Z"
       },
       {
         "event_id": "run01-N04",
@@ -102,7 +102,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:03:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.714Z"
+        "processed_at": "2026-09-24T11:17:05.636Z"
       },
       {
         "event_id": "run01-N05",
@@ -112,7 +112,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:04:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.719Z"
+        "processed_at": "2026-09-24T11:17:05.640Z"
       },
       {
         "event_id": "run01-N06",
@@ -122,7 +122,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:05:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.727Z"
+        "processed_at": "2026-09-24T11:17:05.645Z"
       },
       {
         "event_id": "run01-N07",
@@ -132,7 +132,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:06:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.731Z"
+        "processed_at": "2026-09-24T11:17:05.649Z"
       },
       {
         "event_id": "run01-N08",
@@ -142,7 +142,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:07:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.735Z"
+        "processed_at": "2026-09-24T11:17:05.653Z"
       },
       {
         "event_id": "run01-N09",
@@ -152,7 +152,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:08:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.741Z"
+        "processed_at": "2026-09-24T11:17:05.656Z"
       },
       {
         "event_id": "run01-N10",
@@ -162,7 +162,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:09:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.746Z"
+        "processed_at": "2026-09-24T11:17:05.660Z"
       },
       {
         "event_id": "run01-N11",
@@ -172,7 +172,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:10:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.750Z"
+        "processed_at": "2026-09-24T11:17:05.664Z"
       },
       {
         "event_id": "run01-N12",
@@ -182,7 +182,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:11:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.754Z"
+        "processed_at": "2026-09-24T11:17:05.667Z"
       },
       {
         "event_id": "run01-N13",
@@ -192,7 +192,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:12:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.760Z"
+        "processed_at": "2026-09-24T11:17:05.671Z"
       },
       {
         "event_id": "run01-N14",
@@ -202,7 +202,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:13:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.764Z"
+        "processed_at": "2026-09-24T11:17:05.674Z"
       },
       {
         "event_id": "run01-N15",
@@ -212,7 +212,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:14:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.768Z"
+        "processed_at": "2026-09-24T11:17:05.684Z"
       },
       {
         "event_id": "run01-N16",
@@ -222,7 +222,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:15:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.773Z"
+        "processed_at": "2026-09-24T11:17:05.687Z"
       },
       {
         "event_id": "run01-N17",
@@ -232,7 +232,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:16:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.783Z"
+        "processed_at": "2026-09-24T11:17:05.692Z"
       },
       {
         "event_id": "run01-N18",
@@ -242,7 +242,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:17:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.787Z"
+        "processed_at": "2026-09-24T11:17:05.697Z"
       },
       {
         "event_id": "run01-N19",
@@ -252,7 +252,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:18:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.793Z"
+        "processed_at": "2026-09-24T11:17:05.701Z"
       },
       {
         "event_id": "run01-N20",
@@ -262,7 +262,7 @@
         "status": "CONFIRMED_SIMULATION",
         "run_id": "run01",
         "occurred_at": "2026-09-23T01:19:00.000Z",
-        "processed_at": "2026-09-24T11:08:02.797Z"
+        "processed_at": "2026-09-24T11:17:05.708Z"
       }
     ]
   },

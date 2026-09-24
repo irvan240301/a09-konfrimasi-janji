@@ -1,4 +1,4 @@
-# sesi sesi1 dimulai 2026-09-24T09:02:04.078Z
+# sesi sesi1 dimulai 2026-09-24T11:16:58.347Z
 Worker siap. Exchange: appointments | Queue: confirmations | Run: run01
 Menunggu pesan... (CTRL+C untuk berhenti)
 ✓ Receipt tersimpan: run01-N01 | apt: APT-001 | slot: 2026-09-28T09:00:00+07:00
@@ -21,4 +21,4 @@ Menunggu pesan... (CTRL+C untuk berhenti)
 ✓ Receipt tersimpan: run01-N18 | apt: APT-018 | slot: 2026-09-30T15:00:00+07:00
 ✓ Receipt tersimpan: run01-N19 | apt: APT-019 | slot: 2026-10-01T09:00:00+07:00
 ✓ Receipt tersimpan: run01-N20 | apt: APT-020 | slot: 2026-10-01T10:00:00+07:00
-# sesi sesi1 selesai 2026-09-24T09:02:39.431Z (exit 3221225786)
+# sesi sesi1 selesai 2026-09-24T11:17:20.584Z (exit 4294967295)

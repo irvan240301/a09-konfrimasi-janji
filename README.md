@@ -4,7 +4,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Nama | irvan240301 |
+| Nama | Muhammad Irvan Zuhaidi<br>Muhammad Jihad<br>Muh Afrizal Syafri Rizki |
 | Kode Kasus | A09 |
 | Pola | Worker (W) — satu queue, satu consumer |
 | Stack | Node.js 20.6+ · RabbitMQ 3.13 · PostgreSQL 16 |
@@ -12,10 +12,11 @@
 
 ## Anggota dan Kontribusi
 
-Pengerjaan individu oleh **irvan240301**: pemilihan kasus, desain topology dan
-kontrak pesan, implementasi producer/consumer/dashboard, pengujian U1–U4,
-pengumpulan evidence, dan dokumentasi. Bantuan alat AI dijelaskan pada bagian
-[Penggunaan Alat AI dan Referensi](#penggunaan-alat-ai-dan-referensi).
+Pengerjaan kelompok oleh **Muhammad Irvan Zuhaidi**, **Muhammad Jihad**, dan **Muh Afrizal Syafri Rizki**, dengan pembagian kontribusi:
+
+- **Muhammad Irvan Zuhaidi**: topology, worker, dan skema database
+- **Muhammad Jihad**: producer, dashboard, dan pengujian U1–U4
+- **Muh Afrizal Syafri Rizki**: diagram, laporan, dan slide
 
 ## Deskripsi Singkat
 

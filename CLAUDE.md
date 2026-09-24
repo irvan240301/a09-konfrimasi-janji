@@ -32,6 +32,8 @@ src/
   producers/publish.js  — CLI publish batch by kategori
   api/server.js         — Express API + trigger publish untuk dashboard
   lib/events.js         — generator data uji sintetis (pengganti fixtures/events.json)
+  lib/publisher.js      — publishEvents(): confirm + mandatory/return (deteksi pesan tak ter-route) + deklarasi topology
+                          (dipakai server.js, publish.js, producer.js)
   lib/evidence.js       — tulis input-<kategori>.json ke evidence/<uji>/
   lib/queue-status.js   — status queue via RabbitMQ Management API (dipakai server + hasil)
   lib/snapshot.js       — rekamHasil(): snapshot DB + queue + perbandingan ID (dipakai perekam dan CLI)
@@ -46,7 +48,6 @@ public/
 ```
 
 ### Belum dikerjakan (sebelum presentasi):
-- [ ] Perbaiki publish agar tidak hanya andalkan publisher confirm — tambahkan `mandatory: true` + listener `return` untuk deteksi pesan yang gagal ter-route (lihat halaman 6 panduan capstone resmi)
 - [ ] docs/diagram-a09.svg — diagram arsitektur satu halaman
 - [ ] docs/laporan.md — laporan 3-5 halaman (masalah, desain, hasil U1-U4, 1 diagnosis gangguan, batas prototipe, kontribusi)
 - [ ] evidence/ — isi bukti per uji (input, output, log, observasi broker)

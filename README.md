@@ -29,6 +29,18 @@ Producer → exchange "appointments" (direct)
 Pesan tidak valid → tabel rejected (PostgreSQL)
 ```
 
+### Penanganan hasil publish
+
+Publisher confirm hanya membuktikan broker menerima pesan, bukan bahwa pesan
+masuk queue tujuan. `src/lib/publisher.js` (dipakai dashboard dan CLI) karena itu:
+
+- mendeklarasikan exchange, queue `confirmations`, dan binding (durable, sama dengan
+  worker), sehingga pesan tertahan di queue walau worker belum pernah dijalankan;
+- memakai publisher confirm **dan** flag `mandatory`: pesan yang tidak ter-route ke
+  queue mana pun dikembalikan broker (`basic.return`) dan dilaporkan sebagai error
+  (`Pesan ... tidak ter-route ke queue mana pun`), bukan dianggap sukses;
+- mengirim tiap pesan `persistent` dengan `messageId` = `event_id`.
+
 ## Kontrak Pesan
 
 ```json

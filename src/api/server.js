@@ -1,16 +1,9 @@
 const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
-const amqp    = require('amqplib');
-const {
-  RABBITMQ_URL,
-  EXCHANGE,
-  ROUTING_KEY,
-  EXCHANGE_TYPE,
-  RUN_ID,
-  pool,
-} = require('../config');
+const { RUN_ID, pool } = require('../config');
 const { getQueueStatus } = require('../lib/queue-status');
+const { publishEvents }  = require('../lib/publisher');
 const { saveInputIds }   = require('../lib/evidence');
 const { sebelumPublish, mulaiPemantauan, ambilRiwayat } = require('../lib/perekam');
 const { KATEGORI, buatEvents } = require('../lib/events');
@@ -33,26 +26,10 @@ app.post('/api/publish/:kategori', async (req, res) => {
     });
   }
 
-  let conn, ch;
   try {
     await sebelumPublish(kategori);
 
-    conn = await amqp.connect(RABBITMQ_URL);
-    ch   = await conn.createConfirmChannel();
-    await ch.assertExchange(EXCHANGE, EXCHANGE_TYPE, { durable: true });
-
-    const published = [];
-    for (const event of events) {
-      const sent = ch.publish(
-        EXCHANGE,
-        ROUTING_KEY,
-        Buffer.from(JSON.stringify(event)),
-        { persistent: true, contentType: 'application/json' }
-      );
-      if (!sent) throw new Error(`Buffer penuh saat publish ${event.event_id}`);
-      await ch.waitForConfirms();
-      published.push(event.event_id);
-    }
+    const published = await publishEvents(events);
 
     saveInputIds({
       kategori,
@@ -67,9 +44,6 @@ app.post('/api/publish/:kategori', async (req, res) => {
     res.json({ kategori, count: published.length, event_ids: published });
   } catch (err) {
     res.status(500).json({ error: err.message });
-  } finally {
-    if (ch)   await ch.close().catch(() => {});
-    if (conn) await conn.close().catch(() => {});
   }
 });
 

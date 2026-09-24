@@ -1,13 +1,7 @@
-const amqp = require('amqplib');
 const path = require('path');
-const {
-  RABBITMQ_URL,
-  EXCHANGE,
-  ROUTING_KEY,
-  EXCHANGE_TYPE,
-  RUN_ID,
-} = require('../config');
+const { RUN_ID } = require('../config');
 const { KATEGORI, buatEvents } = require('../lib/events');
+const { publishEvents } = require('../lib/publisher');
 const { saveInputIds } = require('../lib/evidence');
 
 // Ambil argumen: kategori event yang mau dipublish
@@ -23,25 +17,11 @@ if (!events) {
   process.exit(1);
 }
 
-async function publishAll(events) {
-  let conn, ch;
+async function main() {
   try {
-    conn = await amqp.connect(RABBITMQ_URL);
-    ch   = await conn.createConfirmChannel();
-
-    await ch.assertExchange(EXCHANGE, EXCHANGE_TYPE, { durable: true });
-
-    for (const event of events) {
-      const sent = ch.publish(
-        EXCHANGE,
-        ROUTING_KEY,
-        Buffer.from(JSON.stringify(event)),
-        { persistent: true, contentType: 'application/json' }
-      );
-      if (!sent) throw new Error(`Buffer penuh saat publish ${event.event_id}`);
-      await ch.waitForConfirms();
-      console.log(`✓ Published: ${event.event_id}`);
-    }
+    await publishEvents(events, {
+      onPublished: (event) => console.log(`✓ Published: ${event.event_id}`),
+    });
 
     const file = saveInputIds({
       kategori,
@@ -56,10 +36,7 @@ async function publishAll(events) {
   } catch (err) {
     console.error('Gagal:', err.message);
     process.exit(1);
-  } finally {
-    if (ch)   await ch.close().catch(() => {});
-    if (conn) await conn.close().catch(() => {});
   }
 }
 
-publishAll(events);
+main();

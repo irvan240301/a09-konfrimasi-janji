@@ -1,0 +1,8 @@
+# sesi Test02 dimulai 2026-09-24T17:13:57.558Z
+Worker siap. Exchange: appointments | Queue: confirmations | Run: run01
+Menunggu pesan... (CTRL+C untuk berhenti)
+✓ Receipt tersimpan: run01-G01 | apt: APT-021 | slot: 2026-10-01T11:00:00+07:00
+✓ Receipt tersimpan: run01-G02 | apt: APT-022 | slot: 2026-10-01T13:00:00+07:00
+✓ Receipt tersimpan: run01-G03 | apt: APT-023 | slot: 2026-10-01T14:00:00+07:00
+✓ Receipt tersimpan: run01-G04 | apt: APT-024 | slot: 2026-10-01T15:00:00+07:00
+✓ Receipt tersimpan: run01-G05 | apt: APT-025 | slot: 2026-10-02T09:00:00+07:00

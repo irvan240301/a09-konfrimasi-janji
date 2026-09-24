@@ -1,0 +1,24 @@
+# sesi Tes01 dimulai 2026-09-24T16:53:20.516Z
+Worker siap. Exchange: appointments | Queue: confirmations | Run: run01
+Menunggu pesan... (CTRL+C untuk berhenti)
+✓ Receipt tersimpan: run01-N01 | apt: APT-001 | slot: 2026-09-28T09:00:00+07:00
+✓ Receipt tersimpan: run01-N02 | apt: APT-002 | slot: 2026-09-28T10:00:00+07:00
+✓ Receipt tersimpan: run01-N03 | apt: APT-003 | slot: 2026-09-28T11:00:00+07:00
+✓ Receipt tersimpan: run01-N04 | apt: APT-004 | slot: 2026-09-28T13:00:00+07:00
+✓ Receipt tersimpan: run01-N05 | apt: APT-005 | slot: 2026-09-28T14:00:00+07:00
+✓ Receipt tersimpan: run01-N06 | apt: APT-006 | slot: 2026-09-28T15:00:00+07:00
+✓ Receipt tersimpan: run01-N07 | apt: APT-007 | slot: 2026-09-29T09:00:00+07:00
+✓ Receipt tersimpan: run01-N08 | apt: APT-008 | slot: 2026-09-29T10:00:00+07:00
+✓ Receipt tersimpan: run01-N09 | apt: APT-009 | slot: 2026-09-29T11:00:00+07:00
+✓ Receipt tersimpan: run01-N10 | apt: APT-010 | slot: 2026-09-29T13:00:00+07:00
+✓ Receipt tersimpan: run01-N11 | apt: APT-011 | slot: 2026-09-29T14:00:00+07:00
+✓ Receipt tersimpan: run01-N12 | apt: APT-012 | slot: 2026-09-29T15:00:00+07:00
+✓ Receipt tersimpan: run01-N13 | apt: APT-013 | slot: 2026-09-30T09:00:00+07:00
+✓ Receipt tersimpan: run01-N14 | apt: APT-014 | slot: 2026-09-30T10:00:00+07:00
+✓ Receipt tersimpan: run01-N15 | apt: APT-015 | slot: 2026-09-30T11:00:00+07:00
+✓ Receipt tersimpan: run01-N16 | apt: APT-016 | slot: 2026-09-30T13:00:00+07:00
+✓ Receipt tersimpan: run01-N17 | apt: APT-017 | slot: 2026-09-30T14:00:00+07:00
+✓ Receipt tersimpan: run01-N18 | apt: APT-018 | slot: 2026-09-30T15:00:00+07:00
+✓ Receipt tersimpan: run01-N19 | apt: APT-019 | slot: 2026-10-01T09:00:00+07:00
+✓ Receipt tersimpan: run01-N20 | apt: APT-020 | slot: 2026-10-01T10:00:00+07:00
+# sesi Tes01 selesai 2026-09-24T16:53:55.758Z (exit 3221225786)

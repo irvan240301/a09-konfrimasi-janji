@@ -362,25 +362,6 @@ docker compose down -v
   lokal yang terisolasi dan ganti kredensial sebelum dipakai di luar lab.
 - Satu node broker tanpa TLS; status queue dibaca lewat Management API (HTTP).
 
-## Penggunaan Alat AI dan Referensi
-
-**Alat AI.** Claude Code (Anthropic, model Claude Sonnet 5) dipakai pada sesi
-pengembangan untuk: dashboard dan API server (`src/api/server.js`,
-`public/index.html`), generator data uji (`src/lib/events.js`), publisher dengan
-deteksi pesan tak ter-route (`src/lib/publisher.js`), perekam dan perkakas evidence
-(`perekam.js`, `snapshot.js`, `evidence.js`, `hasil.js`, `worker-log.js`),
-penataan ulang folder `src/`, tinjauan keamanan dan kode tak terpakai, serta
-penulisan dokumentasi ini. Instruksi kerja untuk AI disimpan di `CLAUDE.md`.
-
-- Logika `src/consumers/worker.js` (idempotency, ack setelah efek tersimpan,
-  pemisahan penolakan vs error lingkungan) **tidak diubah** oleh AI; berkas itu
-  hanya dipindahkan ke `src/consumers/` dengan penyesuaian path import.
-- Rangkaian bukti final di `evidence/` dijalankan oleh Claude Code di mesin
-  peserta lewat endpoint API dashboard (jalur kode yang sama dengan tombolnya),
-  dengan worker berjalan lewat `npm run worker:log`, terhadap RabbitMQ dan
-  PostgreSQL lokal.
-- Peserta bertanggung jawab memahami dan membuktikan hasilnya.
-
 **Referensi.**
 
 - Panduan *Capstone Project — Implementasi dan Pengelolaan Message Broker untuk

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A09 — Konfirmasi Janji Layanan</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #2a2e38;
+    --text: #e6e8ec;
+    --muted: #8b909c;
+    --accent: #4f8cff;
+    --green: #3ecf8e;
+    --yellow: #e8b339;
+    --red: #e5484d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h2 {
+    font-size: 14px;
+    margin: 0 0 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  button:hover { filter: brightness(1.1); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.danger { background: var(--red); }
+  .status-line { font-size: 12px; color: var(--muted); min-height: 18px; margin-top: 4px; }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat {
+    flex: 1;
+    min-width: 90px;
+    background: #11141a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .stat .val { font-size: 22px; font-weight: 700; }
+  .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .stat.ok .val { color: var(--green); }
+  .stat.warn .val { color: var(--yellow); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+  th, td {
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+  th { color: var(--muted); font-weight: 600; }
+  .table-wrap { max-height: 320px; overflow: auto; }
+  .count-badge {
+    background: var(--accent);
+    color: white;
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+    margin-left: 6px;
+  }
+  .full-width { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+
+<h1>A09 — Konfirmasi Janji Layanan</h1>
+<div class="sub">Panel uji Worker pattern · exchange <code>appointments</code> → queue <code>confirmations</code></div>
+
+<div class="grid">
+
+  <div class="panel full-width">
+    <h2>Panel Kontrol U1–U4</h2>
+    <div class="btn-row">
+      <button data-kategori="normal">Kirim N01–N20 (U1)</button>
+      <button data-kategori="gangguan">Kirim G01–G05 (U2)</button>
+      <button data-kategori="replay">Replay N01–N05 (U3)</button>
+      <button data-kategori="invalid">Kirim X01 (U4)</button>
+      <button data-kategori="valid_setelah_invalid">Kirim V01 (U4)</button>
+      <button class="danger" id="btn-reset">Reset DB</button>
+    </div>
+    <div class="status-line" id="publish-status"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Status Queue "confirmations"</h2>
+    <div class="stat-row" id="queue-stats">
+      <div class="stat"><div class="val">–</div><div class="lbl">Ready</div></div>
+      <div class="stat"><div class="val">–</div><div class="lbl">Unacked</div></div>
+      <div class="stat"><div class="val">–</div><div class="lbl">Total</div></div>
+      <div class="stat"><div class="val">–</div><div class="lbl">Consumers</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Ringkasan</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="val" id="receipt-count">–</div><div class="lbl">Receipt</div></div>
+      <div class="stat"><div class="val" id="rejected-count">–</div><div class="lbl">Rejected</div></div>
+    </div>
+  </div>
+
+  <div class="panel full-width">
+    <h2>Receipts <span class="count-badge" id="receipts-badge">0</span></h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>event_id</th><th>appointment_id</th><th>slot</th><th>status</th><th>processed_at</th></tr>
+        </thead>
+        <tbody id="receipts-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel full-width">
+    <h2>Rejected <span class="count-badge" id="rejected-badge">0</span></h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>event_id</th><th>reason</th><th>rejected_at</th></tr>
+        </thead>
+        <tbody id="rejected-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = '';
+
+async function publish(kategori, btn) {
+  const statusEl = document.getElementById('publish-status');
+  btn.disabled = true;
+  statusEl.textContent = `Mengirim ${kategori}...`;
+  try {
+    const res = await fetch(`${API}/api/publish/${kategori}`, { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Gagal publish');
+    statusEl.textContent = `✓ ${data.count} event terkirim (${kategori})`;
+  } catch (err) {
+    statusEl.textContent = `✗ ${err.message}`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.querySelectorAll('button[data-kategori]').forEach((btn) => {
+  btn.addEventListener('click', () => publish(btn.dataset.kategori, btn));
+});
+
+document.getElementById('btn-reset').addEventListener('click', async () => {
+  if (!confirm('Yakin TRUNCATE tabel receipts dan rejected?')) return;
+  const statusEl = document.getElementById('publish-status');
+  try {
+    const res = await fetch(`${API}/api/reset`, { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Gagal reset');
+    statusEl.textContent = '✓ Database direset';
+    refreshAll();
+  } catch (err) {
+    statusEl.textContent = `✗ ${err.message}`;
+  }
+});
+
+async function refreshQueueStatus() {
+  const wrap = document.getElementById('queue-stats');
+  try {
+    const res = await fetch(`${API}/api/queue-status`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    const pending = data.ready > 0 || data.unacked > 0;
+    wrap.innerHTML = `
+      <div class="stat ${pending ? 'warn' : 'ok'}"><div class="val">${data.ready}</div><div class="lbl">Ready</div></div>
+      <div class="stat ${data.unacked > 0 ? 'warn' : 'ok'}"><div class="val">${data.unacked}</div><div class="lbl">Unacked</div></div>
+      <div class="stat"><div class="val">${data.total}</div><div class="lbl">Total</div></div>
+      <div class="stat ${data.consumers > 0 ? 'ok' : 'warn'}"><div class="val">${data.consumers}</div><div class="lbl">Consumers</div></div>
+    `;
+  } catch {
+    wrap.innerHTML = `<div class="stat"><div class="val">–</div><div class="lbl">Tidak tersedia</div></div>`;
+  }
+}
+
+function esc(v) {
+  return String(v ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
+async function refreshReceipts() {
+  try {
+    const res = await fetch(`${API}/api/receipts`);
+    const data = await res.json();
+    document.getElementById('receipts-badge').textContent = data.count;
+    document.getElementById('receipt-count').textContent = data.count;
+    document.getElementById('receipts-body').innerHTML = data.rows.map((r) => `
+      <tr>
+        <td>${esc(r.event_id)}</td>
+        <td>${esc(r.appointment_id)}</td>
+        <td>${esc(r.slot)}</td>
+        <td>${esc(r.status)}</td>
+        <td>${esc(r.processed_at)}</td>
+      </tr>
+    `).join('');
+  } catch { /* biarkan tampilan lama jika fetch gagal */ }
+}
+
+async function refreshRejected() {
+  try {
+    const res = await fetch(`${API}/api/rejected`);
+    const data = await res.json();
+    document.getElementById('rejected-badge').textContent = data.count;
+    document.getElementById('rejected-count').textContent = data.count;
+    document.getElementById('rejected-body').innerHTML = data.rows.map((r) => `
+      <tr>
+        <td>${esc(r.event_id)}</td>
+        <td>${esc(r.reason)}</td>
+        <td>${esc(r.rejected_at)}</td>
+      </tr>
+    `).join('');
+  } catch { /* biarkan tampilan lama jika fetch gagal */ }
+}
+
+function refreshAll() {
+  refreshQueueStatus();
+  refreshReceipts();
+  refreshRejected();
+}
+
+refreshAll();
+setInterval(refreshAll, 3000);
+</script>
+
+</body>
+</html>

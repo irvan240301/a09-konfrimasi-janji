@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "node --env-file=.env src/server.js",
     "worker": "node --env-file=.env src/worker.js",
     "publish": "node --env-file=.env src/publish.js",
     "db:reset": "docker exec -it a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""
@@ -25,6 +26,8 @@
   "homepage": "https://github.com/irvan240301/a09-konfrimasi-janji#readme",
   "dependencies": {
     "amqplib": "^2.0.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "pg": "^8.23.0"
   }
 }

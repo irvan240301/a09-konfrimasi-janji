@@ -1,0 +1,23 @@
+{
+  "uji": "U4",
+  "kategori": "invalid",
+  "run_id": "run01",
+  "source": "api",
+  "command": "POST /api/publish/invalid",
+  "published_at": "2026-09-24T11:10:53.080Z",
+  "count": 1,
+  "event_ids": [
+    "run01-X01"
+  ],
+  "events": [
+    {
+      "event_id": "run01-X01",
+      "event_type": "appointment.booked",
+      "occurred_at": "2026-09-23T03:00:00Z",
+      "payload": {
+        "customer_id": "CUS-099",
+        "slot": "2026-10-02T10:00:00+07:00"
+      }
+    }
+  ]
+}

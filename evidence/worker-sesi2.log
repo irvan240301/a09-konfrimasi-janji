@@ -1,0 +1,15 @@
+# sesi sesi2 dimulai 2026-09-24T09:03:13.133Z
+Worker siap. Exchange: appointments | Queue: confirmations | Run: run01
+Menunggu pesan... (CTRL+C untuk berhenti)
+✓ Receipt tersimpan: run01-G01 | apt: APT-021 | slot: 2026-10-01T11:00:00+07:00
+✓ Receipt tersimpan: run01-G02 | apt: APT-022 | slot: 2026-10-01T13:00:00+07:00
+✓ Receipt tersimpan: run01-G03 | apt: APT-023 | slot: 2026-10-01T14:00:00+07:00
+✓ Receipt tersimpan: run01-G04 | apt: APT-024 | slot: 2026-10-01T15:00:00+07:00
+✓ Receipt tersimpan: run01-G05 | apt: APT-025 | slot: 2026-10-02T09:00:00+07:00
+~ Duplikat diabaikan: run01-N01 (receipt sudah ada)
+~ Duplikat diabaikan: run01-N02 (receipt sudah ada)
+~ Duplikat diabaikan: run01-N03 (receipt sudah ada)
+~ Duplikat diabaikan: run01-N04 (receipt sudah ada)
+~ Duplikat diabaikan: run01-N05 (receipt sudah ada)
+✗ Ditolak (MISSING_appointment_id) event_id: run01-X01 → tabel rejected
+✓ Receipt tersimpan: run01-V01 | apt: APT-026 | slot: 2026-10-02T11:00:00+07:00

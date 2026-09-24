@@ -1,0 +1,316 @@
+{
+  "uji": "U4",
+  "tahap": null,
+  "run_id": "run01",
+  "source": "otomatis",
+  "command": "rekam otomatis oleh server setelah publish",
+  "captured_at": "2026-09-24T11:11:25.437Z",
+  "queue": {
+    "ready": 0,
+    "unacked": 0,
+    "total": 0,
+    "consumers": 1
+  },
+  "receipts": {
+    "count": 26,
+    "rows": [
+      {
+        "event_id": "run01-G01",
+        "appointment_id": "APT-021",
+        "customer_id": "CUS-021",
+        "slot": "2026-10-01T11:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T02:00:00.000Z",
+        "processed_at": "2026-09-24T11:09:08.541Z"
+      },
+      {
+        "event_id": "run01-G02",
+        "appointment_id": "APT-022",
+        "customer_id": "CUS-022",
+        "slot": "2026-10-01T13:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T02:01:00.000Z",
+        "processed_at": "2026-09-24T11:09:08.547Z"
+      },
+      {
+        "event_id": "run01-G03",
+        "appointment_id": "APT-023",
+        "customer_id": "CUS-023",
+        "slot": "2026-10-01T14:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T02:02:00.000Z",
+        "processed_at": "2026-09-24T11:09:08.553Z"
+      },
+      {
+        "event_id": "run01-G04",
+        "appointment_id": "APT-024",
+        "customer_id": "CUS-024",
+        "slot": "2026-10-01T15:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T02:03:00.000Z",
+        "processed_at": "2026-09-24T11:09:08.560Z"
+      },
+      {
+        "event_id": "run01-G05",
+        "appointment_id": "APT-025",
+        "customer_id": "CUS-025",
+        "slot": "2026-10-02T09:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T02:04:00.000Z",
+        "processed_at": "2026-09-24T11:09:08.566Z"
+      },
+      {
+        "event_id": "run01-N01",
+        "appointment_id": "APT-001",
+        "customer_id": "CUS-001",
+        "slot": "2026-09-28T09:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:00:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.693Z"
+      },
+      {
+        "event_id": "run01-N02",
+        "appointment_id": "APT-002",
+        "customer_id": "CUS-002",
+        "slot": "2026-09-28T10:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:01:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.705Z"
+      },
+      {
+        "event_id": "run01-N03",
+        "appointment_id": "APT-003",
+        "customer_id": "CUS-003",
+        "slot": "2026-09-28T11:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:02:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.709Z"
+      },
+      {
+        "event_id": "run01-N04",
+        "appointment_id": "APT-004",
+        "customer_id": "CUS-004",
+        "slot": "2026-09-28T13:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:03:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.714Z"
+      },
+      {
+        "event_id": "run01-N05",
+        "appointment_id": "APT-005",
+        "customer_id": "CUS-005",
+        "slot": "2026-09-28T14:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:04:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.719Z"
+      },
+      {
+        "event_id": "run01-N06",
+        "appointment_id": "APT-006",
+        "customer_id": "CUS-006",
+        "slot": "2026-09-28T15:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:05:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.727Z"
+      },
+      {
+        "event_id": "run01-N07",
+        "appointment_id": "APT-007",
+        "customer_id": "CUS-007",
+        "slot": "2026-09-29T09:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:06:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.731Z"
+      },
+      {
+        "event_id": "run01-N08",
+        "appointment_id": "APT-008",
+        "customer_id": "CUS-008",
+        "slot": "2026-09-29T10:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:07:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.735Z"
+      },
+      {
+        "event_id": "run01-N09",
+        "appointment_id": "APT-009",
+        "customer_id": "CUS-009",
+        "slot": "2026-09-29T11:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:08:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.741Z"
+      },
+      {
+        "event_id": "run01-N10",
+        "appointment_id": "APT-010",
+        "customer_id": "CUS-010",
+        "slot": "2026-09-29T13:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:09:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.746Z"
+      },
+      {
+        "event_id": "run01-N11",
+        "appointment_id": "APT-011",
+        "customer_id": "CUS-011",
+        "slot": "2026-09-29T14:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:10:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.750Z"
+      },
+      {
+        "event_id": "run01-N12",
+        "appointment_id": "APT-012",
+        "customer_id": "CUS-012",
+        "slot": "2026-09-29T15:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:11:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.754Z"
+      },
+      {
+        "event_id": "run01-N13",
+        "appointment_id": "APT-013",
+        "customer_id": "CUS-013",
+        "slot": "2026-09-30T09:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:12:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.760Z"
+      },
+      {
+        "event_id": "run01-N14",
+        "appointment_id": "APT-014",
+        "customer_id": "CUS-014",
+        "slot": "2026-09-30T10:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:13:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.764Z"
+      },
+      {
+        "event_id": "run01-N15",
+        "appointment_id": "APT-015",
+        "customer_id": "CUS-015",
+        "slot": "2026-09-30T11:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:14:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.768Z"
+      },
+      {
+        "event_id": "run01-N16",
+        "appointment_id": "APT-016",
+        "customer_id": "CUS-016",
+        "slot": "2026-09-30T13:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:15:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.773Z"
+      },
+      {
+        "event_id": "run01-N17",
+        "appointment_id": "APT-017",
+        "customer_id": "CUS-017",
+        "slot": "2026-09-30T14:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:16:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.783Z"
+      },
+      {
+        "event_id": "run01-N18",
+        "appointment_id": "APT-018",
+        "customer_id": "CUS-018",
+        "slot": "2026-09-30T15:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:17:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.787Z"
+      },
+      {
+        "event_id": "run01-N19",
+        "appointment_id": "APT-019",
+        "customer_id": "CUS-019",
+        "slot": "2026-10-01T09:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:18:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.793Z"
+      },
+      {
+        "event_id": "run01-N20",
+        "appointment_id": "APT-020",
+        "customer_id": "CUS-020",
+        "slot": "2026-10-01T10:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T01:19:00.000Z",
+        "processed_at": "2026-09-24T11:08:02.797Z"
+      },
+      {
+        "event_id": "run01-V01",
+        "appointment_id": "APT-026",
+        "customer_id": "CUS-026",
+        "slot": "2026-10-02T11:00:00+07:00",
+        "status": "CONFIRMED_SIMULATION",
+        "run_id": "run01",
+        "occurred_at": "2026-09-23T03:01:00.000Z",
+        "processed_at": "2026-09-24T11:11:19.403Z"
+      }
+    ]
+  },
+  "rejected": {
+    "count": 1,
+    "rows": [
+      {
+        "id": "1",
+        "event_id": "run01-X01",
+        "reason": "MISSING_appointment_id",
+        "run_id": "run01",
+        "rejected_at": "2026-09-24T11:10:53.105Z",
+        "payload": {
+          "payload": {
+            "slot": "2026-10-02T10:00:00+07:00",
+            "customer_id": "CUS-099"
+          },
+          "event_id": "run01-X01",
+          "event_type": "appointment.booked",
+          "occurred_at": "2026-09-23T03:00:00Z"
+        }
+      }
+    ]
+  },
+  "perbandingan_id": {
+    "receipts": {
+      "diharapkan": 26,
+      "aktual": 26,
+      "hilang": [],
+      "tak_diduga": [],
+      "sesuai": true
+    },
+    "rejected": {
+      "diharapkan": 1,
+      "aktual": 1,
+      "hilang": [],
+      "tak_diduga": [],
+      "sesuai": true
+    }
+  }
+}

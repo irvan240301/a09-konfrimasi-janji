@@ -13,6 +13,7 @@ const {
 } = require('../config');
 const { getQueueStatus } = require('../lib/queue-status');
 const { saveInputIds }   = require('../lib/evidence');
+const { rekamHasil }     = require('../lib/snapshot');
 
 const PORT = process.env.PORT || 3000;
 
@@ -108,6 +109,15 @@ app.get('/api/queue-status', async (req, res) => {
     res.json(await getQueueStatus());
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/hasil/:uji?tahap=... — rekam snapshot hasil ke evidence/ (sama dengan npm run hasil)
+app.post('/api/hasil/:uji', async (req, res) => {
+  try {
+    res.json(await rekamHasil(req.params.uji, req.query.tahap, 'api'));
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
   }
 });
 

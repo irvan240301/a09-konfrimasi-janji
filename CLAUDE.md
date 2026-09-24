@@ -33,7 +33,9 @@ src/
   api/server.js         — Express API + trigger publish untuk dashboard
   lib/evidence.js       — tulis input-<kategori>.json ke evidence/<uji>/
   lib/queue-status.js   — status queue via RabbitMQ Management API (dipakai server + hasil)
-  tools/hasil.js        — npm run hasil -- <uji> [tahap]: snapshot DB + queue + perbandingan ID
+  lib/snapshot.js       — rekamHasil(): snapshot DB + queue + perbandingan ID (dipakai CLI dan API)
+  tools/hasil.js        — CLI: npm run hasil -- <uji> [tahap]
+  (API: POST /api/hasil/:uji?tahap=... + panel "Rekam Evidence" di dashboard)
 public/
   index.html            — dashboard statis
 ```

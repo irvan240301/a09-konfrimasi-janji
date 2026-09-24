@@ -6,18 +6,18 @@ const {
   EXCHANGE,
   ROUTING_KEY,
   EXCHANGE_TYPE,
-} = require('./config');
+} = require('../config');
 
 // Baca fixtures
 const fixtures = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../fixtures/events.json'), 'utf8')
+  fs.readFileSync(path.join(__dirname, '../../fixtures/events.json'), 'utf8')
 );
 
 // Ambil argumen: kategori event yang mau dipublish
-// Contoh: node src/publish.js normal
-//         node src/publish.js gangguan
-//         node src/publish.js invalid
-//         node src/publish.js valid_setelah_invalid
+// Contoh: node src/producers/publish.js normal
+//         node src/producers/publish.js gangguan
+//         node src/producers/publish.js invalid
+//         node src/producers/publish.js valid_setelah_invalid
 const kategori = process.argv[2];
 const events   = fixtures[kategori];
 

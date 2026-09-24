@@ -7,7 +7,7 @@ const {
   EXCHANGE_TYPE,
   RUN_ID,
   pool,
-} = require('./config');
+} = require('../config');
 
 async function main() {
   let conn, ch;

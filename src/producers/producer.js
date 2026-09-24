@@ -4,10 +4,10 @@ const {
   EXCHANGE,
   ROUTING_KEY,
   EXCHANGE_TYPE,
-} = require('./config');
+} = require('../config');
 
 // Ambil data event dari argumen CLI
-// Contoh pemakaian: node src/producer.js '{"event_id":"run01-N01",...}'
+// Contoh pemakaian: node src/producers/producer.js '{"event_id":"run01-N01",...}'
 async function publish(eventJson) {
   let conn, ch;
   try {
@@ -51,7 +51,7 @@ async function publish(eventJson) {
 // Ambil argumen dari CLI
 const input = process.argv[2];
 if (!input) {
-  console.error('Penggunaan: node src/producer.js \'<json_event>\'');
+  console.error('Penggunaan: node src/producers/producer.js \'<json_event>\'');
   process.exit(1);
 }
 

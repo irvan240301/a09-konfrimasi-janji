@@ -13,22 +13,35 @@ Stack: Node.js 20.6+ · RabbitMQ 3.13 · PostgreSQL 16 · Docker
 ### Sudah selesai dan terbukti:
 - [x] Infrastruktur: docker-compose.yml (RabbitMQ + PostgreSQL)
 - [x] Schema DB: tabel `receipts` + `rejected` sudah dibuat
-- [x] src/config.js — konstanta topology + koneksi pool
-- [x] src/worker.js — consumer dengan idempotency + manual ack
-- [x] src/publish.js — CLI publisher (AKAN DIGANTI server.js)
+- [x] src/config/index.js — konstanta topology + koneksi pool
+- [x] src/consumers/worker.js — consumer dengan idempotency + manual ack
+- [x] src/producers/producer.js, src/producers/publish.js — CLI publisher
+- [x] src/api/server.js — Express API Server
+- [x] public/index.html — Frontend dashboard satu halaman
 - [x] fixtures/events.json — data sintetis N01–N20, G01–G05, X01, V01
 - [x] Bukti U1=20, U2=25, U3=25 (duplikat diabaikan), U4=26 receipt + X01 di rejected
 - [x] README.md, .gitignore, .env.contoh
 
-### Sedang dikerjakan (PRIORITAS MALAM INI):
-- [ ] src/server.js — Express API Server (GANTI publish.js)
-- [ ] public/index.html — Frontend satu halaman
-- [ ] npm install express cors
+### Struktur folder saat ini
 
-### Belum dikerjakan (besok pagi sebelum presentasi):
-- [ ] docs/diagram-a09.svg — diagram arsitektur
-- [ ] docs/laporan.md — laporan 3-5 halaman
-- [ ] Slide presentasi (5 slide)
+```
+src/
+  config/index.js       — konstanta topology + koneksi pool
+  consumers/worker.js   — consumer (worker pattern)
+  producers/producer.js — CLI publish single-event
+  producers/publish.js  — CLI publish batch by kategori
+  api/server.js         — Express API + trigger publish untuk dashboard
+public/
+  index.html            — dashboard statis
+```
+
+### Belum dikerjakan (sebelum presentasi):
+- [ ] Perbaiki publish agar tidak hanya andalkan publisher confirm — tambahkan `mandatory: true` + listener `return` untuk deteksi pesan yang gagal ter-route (lihat halaman 6 panduan capstone resmi)
+- [ ] docs/diagram-a09.svg — diagram arsitektur satu halaman
+- [ ] docs/laporan.md — laporan 3-5 halaman (masalah, desain, hasil U1-U4, 1 diagnosis gangguan, batas prototipe, kontribusi)
+- [ ] evidence/ — isi bukti per uji (input, output, log, observasi broker)
+- [ ] README.md — tambah bagian kontribusi anggota + catatan penggunaan AI (wajib resmi, halaman 8 panduan capstone)
+- [ ] Slide presentasi (maksimum 5 slide)
 
 ---
 
@@ -86,9 +99,9 @@ CREATE TABLE IF NOT EXISTS rejected (
 
 ---
 
-## YANG HARUS DIBANGUN SEKARANG
+## YANG SUDAH DIBANGUN (referensi)
 
-### 1. src/server.js (Express API Server)
+### 1. src/api/server.js (Express API Server)
 
 Endpoint yang dibutuhkan:
 
@@ -104,8 +117,8 @@ Kategori publish: `normal` (N01–N20), `gangguan` (G01–G05),
 `replay` (N01–N05), `invalid` (X01), `valid_setelah_invalid` (V01)
 
 Data fixtures dibaca dari: `fixtures/events.json`
-Publish menggunakan: `amqplib` (sama seperti publish.js yang lama)
-Koneksi DB: pool dari config.js
+Publish menggunakan: `amqplib` (sama seperti src/producers/publish.js)
+Koneksi DB: pool dari src/config/index.js
 
 ### 2. public/index.html (Frontend satu halaman)
 
@@ -139,17 +152,18 @@ Empat bagian UI:
 - Gaya modern: dark mode, warna konsisten dengan status
 - Server berjalan di port 3000 → fetch ke http://localhost:3000/api/...
 
-### 3. Perubahan package.json
+### 3. package.json (sudah diterapkan)
 
 ```json
 "scripts": {
-  "start":    "node --env-file=.env src/server.js",
-  "worker":   "node --env-file=.env src/worker.js",
+  "start":    "node --env-file=.env src/api/server.js",
+  "worker":   "node --env-file=.env src/consumers/worker.js",
+  "publish":  "node --env-file=.env src/producers/publish.js",
   "db:reset": "docker exec -it a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""
 }
 ```
 
-### 4. Install dependency baru
+### 4. Dependency (sudah terpasang)
 
 ```bash
 npm install express cors
@@ -162,7 +176,7 @@ npm install express cors
 ### Idempotency
 Worker menggunakan `ON CONFLICT (event_id) DO NOTHING`.
 `ack` HANYA setelah receipt tersimpan di DB.
-Jangan ubah logika ini di worker.js.
+Jangan ubah logika ini di src/consumers/worker.js.
 
 ### Durability
 Exchange + Queue harus `durable: true`.
@@ -191,7 +205,7 @@ Endpoint queue: GET http://localhost:15672/api/queues/a09vhost/confirmations
 
 ---
 
-## CARA MENJALANKAN (SETELAH SERVER.JS SELESAI)
+## CARA MENJALANKAN
 
 ```bash
 # Terminal 1 — Infrastruktur
@@ -226,6 +240,6 @@ buka http://localhost:3000
 2. Jangan sarankan deployment produksi, Kubernetes, cluster HA, atau dua broker.
 3. Kalau ada yang ambigu, tanya 1 pertanyaan singkat dulu.
 4. Setiap perubahan kode → ingatkan untuk `git add . && git commit && git push`.
-5. Prioritas malam ini: server.js + index.html. Laporan besok pagi.
-6. Catat penggunaan AI di README (sudah ada catatannya).
-7. Worker.js TIDAK BOLEH diubah — logika idempotency sudah terbukti benar.
+5. Prioritas sekarang: docs/laporan.md, docs/diagram-a09.svg, isi evidence/, catatan AI di README.
+6. Catat penggunaan AI di README — ini wajib resmi (panduan capstone halaman 8), belum ada.
+7. src/consumers/worker.js TIDAK BOLEH diubah — logika idempotency sudah terbukti benar.

@@ -9,13 +9,13 @@ const {
   ROUTING_KEY,
   EXCHANGE_TYPE,
   pool,
-} = require('./config');
+} = require('../config');
 
 const PORT = process.env.PORT || 3000;
 
 // Fixtures dibaca sekali saat startup — sama dengan yang dipakai publish.js
 const fixtures = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../fixtures/events.json'), 'utf8')
+  fs.readFileSync(path.join(__dirname, '../../fixtures/events.json'), 'utf8')
 );
 const KATEGORI_VALID = Object.keys(fixtures);
 
@@ -30,7 +30,7 @@ const VHOST = encodeURIComponent(amqpUrl.pathname.slice(1) || '/');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../../public')));
 
 // POST /api/publish/:kategori — publish semua event fixture kategori terkait
 app.post('/api/publish/:kategori', async (req, res) => {

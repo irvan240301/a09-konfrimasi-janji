@@ -2,14 +2,13 @@
   "name": "a09-konfirmasi-janji",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "start": "node --env-file=.env src/server.js",
-    "worker": "node --env-file=.env src/worker.js",
-    "publish": "node --env-file=.env src/publish.js",
+    "start": "node --env-file=.env src/api/server.js",
+    "worker": "node --env-file=.env src/consumers/worker.js",
+    "publish": "node --env-file=.env src/producers/publish.js",
     "db:reset": "docker exec -it a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""
   },
   "repository": {

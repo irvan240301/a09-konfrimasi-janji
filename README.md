@@ -93,34 +93,75 @@ npm run worker
 # Worker siap. Exchange: appointments | Queue: confirmations | Run: run01
 ```
 
+```bash
+# Terminal 2 — jalankan API server + dashboard
+npm run start
+
+# Tunggu hingga muncul:
+# Server siap di http://localhost:3000
+```
+
+Buka browser ke `http://localhost:3000` untuk dashboard kontrol.
+
 ## Publish & Test (U1–U4)
 
-Jalankan dari Terminal 2 setelah worker siap:
+Semua publish sekarang dilakukan lewat dashboard (`http://localhost:3000`).
+Kalau ingin reset bukti dari nol, klik tombol merah **"Reset DB"** dulu
+(TRUNCATE `receipts` + `rejected`) — kalau tidak, event dengan `event_id`
+yang sama hanya akan tercatat sebagai duplikat (perilaku idempotency
+yang memang diharapkan), bukan gagal.
+
+```
+U1 — 20 event valid (N01–N20)
+  Klik "Kirim N01–N20 (U1)"
+  → Tabel Receipts di dashboard harus jadi 20
+
+U2 — Gangguan consumer
+  1. Tekan CTRL+C di Terminal 1 (matikan worker)
+  2. Klik "Kirim G01–G05 (U2)" di dashboard
+  3. Lihat panel Status Queue di dashboard → Ready harus naik jadi 5
+     (atau cek Management UI: http://localhost:15672 → queue confirmations)
+  4. Hidupkan kembali worker: npm run worker di Terminal 1
+  5. Worker memproses G01–G05 otomatis tanpa kirim ulang manual
+     → Status Queue kembali ke 0, Receipts naik jadi 25
+
+U3 — Replay idempotency (N01–N05 dengan event_id dan payload semula)
+  Klik "Replay N01–N05 (U3)"
+  → Receipts tetap 25, log worker menampilkan "Duplikat diabaikan"
+
+U4 — Pesan tidak valid + valid setelahnya
+  Klik "Kirim X01 (U4)" → Rejected bertambah 1 (MISSING_appointment_id), Receipts tetap 25
+  Klik "Kirim V01 (U4)" → Receipts naik jadi 26
+```
+
+Panel Status Queue dan tabel Receipts/Rejected di dashboard auto-refresh
+setiap 3 detik, jadi tidak perlu refresh manual saat menguji.
+
+### Alternatif: CLI (tanpa dashboard)
+
+Script `npm run publish` (via `src/producers/publish.js`) masih tersedia sebagai
+fallback kalau dashboard tidak dipakai:
 
 ```bash
-# U1 — 20 event valid (N01–N20)
 npm run publish normal
-
-# U2 — Gangguan consumer
-# 1. Tekan CTRL+C di Terminal 1 (matikan worker)
-# 2. Publish G01–G05:
 npm run publish gangguan
-# 3. Cek Management UI: http://localhost:15672 → queue confirmations → Ready=5
-# 4. Hidupkan kembali worker di Terminal 1:
-npm run worker
-# 5. Worker memproses G01–G05 otomatis tanpa kirim ulang manual
-
-# U3 — Replay idempotency (N01–N05 dengan event_id dan payload semula)
 npm run publish replay
-
-# U4 — Pesan tidak valid + valid setelahnya
 npm run publish invalid
 npm run publish valid_setelah_invalid
 ```
 
 ## Cara Memeriksa Hasil
 
-Buka DBeaver atau psql, koneksi ke `a09db`:
+Cara tercepat: lihat langsung tabel **Receipts** dan **Rejected** di
+dashboard (`http://localhost:3000`), atau panggil API-nya:
+
+```bash
+curl http://localhost:3000/api/receipts
+curl http://localhost:3000/api/rejected
+curl http://localhost:3000/api/queue-status
+```
+
+Atau lewat DBeaver/psql, koneksi ke `a09db`:
 
 ```sql
 -- Hitung receipt (target akhir U4: 26)
@@ -138,18 +179,21 @@ FROM rejected;
 
 Target angka yang dibuktikan:
 
-| Uji | Perintah | Target | Hasil Aktual |
-|-----|----------|--------|--------------|
-| U1 | publish normal | count = 20 | 20 ✅ |
-| U2 | publish gangguan + restart worker | count = 25, Ready=5 terbukti | 25 ✅ |
-| U3 | publish replay | count tetap 25, log "Duplikat diabaikan" | 25 ✅ |
-| U4 | publish invalid + valid_setelah_invalid | count = 26, X01 di rejected | 26 ✅ |
+| Uji | Aksi (dashboard) | Target | Hasil Aktual |
+|-----|-------------------|--------|--------------|
+| U1 | "Kirim N01–N20 (U1)" | count = 20 | 20 ✅ |
+| U2 | "Kirim G01–G05 (U2)" + restart worker | count = 25, Ready=5 terbukti | 25 ✅ |
+| U3 | "Replay N01–N05 (U3)" | count tetap 25, log "Duplikat diabaikan" | 25 ✅ |
+| U4 | "Kirim X01 (U4)" + "Kirim V01 (U4)" | count = 26, X01 di rejected | 26 ✅ |
 
 ## Stop
 
 ```bash
 # Stop worker
 # Tekan CTRL+C di Terminal 1
+
+# Stop API server
+# Tekan CTRL+C di Terminal 2
 
 # Stop container — data TETAP ada (volume tidak dihapus)
 docker compose stop

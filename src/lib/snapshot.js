@@ -1,15 +1,12 @@
-const fs   = require('fs');
 const path = require('path');
 const { pool, RUN_ID } = require('../config');
 const { getQueueStatus } = require('./queue-status');
 const { writeEvidence } = require('./evidence');
+const { buatEvents } = require('./events');
 
 const ROOT = path.join(__dirname, '../..');
 
-const fixtures = JSON.parse(
-  fs.readFileSync(path.join(ROOT, 'fixtures/events.json'), 'utf8')
-);
-const ids = (kategori) => fixtures[kategori].map((e) => e.event_id);
+const ids = (kategori) => buatEvents(kategori, RUN_ID).map((e) => e.event_id);
 
 // Himpunan ID yang diharapkan pada akhir tiap uji
 const sampaiU2 = [...ids('normal'), ...ids('gangguan')];

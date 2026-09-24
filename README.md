@@ -47,6 +47,22 @@ Pesan tidak valid → tabel rejected (PostgreSQL)
 Field wajib untuk U4: `appointment_id`. Pesan tanpa field ini
 ditolak ke tabel `rejected` tanpa efek bisnis.
 
+## Data Uji
+
+Data uji sintetis dibangkitkan oleh `src/lib/events.js` — deterministik
+(tanpa acak): `event_id`, `appointment_id`, dan `slot` dihitung dari nomor urut,
+jadi replay U3 selalu menghasilkan event yang persis sama dengan N01–N05 asli.
+Prefiks `event_id` diambil dari `RUN_ID` di `.env` (default `run01`); ganti
+(misalnya `run02`) untuk pengujian baru agar bukti tidak bercampur.
+
+| Kategori | Event | Untuk |
+|----------|-------|-------|
+| `normal` | N01–N20 | U1 |
+| `gangguan` | G01–G05 | U2 |
+| `replay` | N01–N05 (identik dengan `normal`) | U3 |
+| `invalid` | X01 (tanpa `appointment_id`) | U4 |
+| `valid_setelah_invalid` | V01 | U4 |
+
 ## Prasyarat
 
 - Docker Desktop (running)

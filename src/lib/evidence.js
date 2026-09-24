@@ -3,7 +3,7 @@ const path = require('path');
 
 const EVIDENCE_DIR = path.join(__dirname, '../../evidence');
 
-// Kategori fixture -> label uji pada folder evidence/
+// Kategori event uji -> label uji pada folder evidence/
 const UJI_BY_KATEGORI = {
   normal:                'U1',
   gangguan:              'U2',
@@ -20,9 +20,9 @@ function writeEvidence(uji, filename, data) {
   return file;
 }
 
-// Catat daftar event_id yang dikirim. Kegagalan tulis tidak boleh
+// Catat event yang dikirim (daftar ID + isi lengkap). Kegagalan tulis tidak boleh
 // menggagalkan publish yang sudah berhasil, jadi hanya diberi peringatan.
-function saveInputIds({ kategori, eventIds, source, command, runId }) {
+function saveInputIds({ kategori, events, source, command, runId }) {
   const uji = UJI_BY_KATEGORI[kategori];
   if (!uji) return null;
   try {
@@ -33,8 +33,9 @@ function saveInputIds({ kategori, eventIds, source, command, runId }) {
       source,
       command,
       published_at: new Date().toISOString(),
-      count:        eventIds.length,
-      event_ids:    eventIds,
+      count:        events.length,
+      event_ids:    events.map((e) => e.event_id),
+      events,
     });
   } catch (err) {
     console.error(`! Gagal menulis evidence: ${err.message}`);

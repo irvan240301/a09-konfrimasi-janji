@@ -18,7 +18,7 @@ Stack: Node.js 20.6+ · RabbitMQ 3.13 · PostgreSQL 16 · Docker
 - [x] src/producers/producer.js, src/producers/publish.js — CLI publisher
 - [x] src/api/server.js — Express API Server
 - [x] public/index.html — Frontend dashboard satu halaman
-- [x] fixtures/events.json — data sintetis N01–N20, G01–G05, X01, V01
+- [x] src/lib/events.js — generator data uji sintetis deterministik N01–N20, G01–G05, X01, V01 (menggantikan fixtures/events.json; output terbukti identik)
 - [x] Bukti U1=20, U2=25, U3=25 (duplikat diabaikan), U4=26 receipt + X01 di rejected
 - [x] README.md, .gitignore, .env.contoh
 
@@ -31,6 +31,7 @@ src/
   producers/producer.js — CLI publish single-event
   producers/publish.js  — CLI publish batch by kategori
   api/server.js         — Express API + trigger publish untuk dashboard
+  lib/events.js         — generator data uji sintetis (pengganti fixtures/events.json)
   lib/evidence.js       — tulis input-<kategori>.json ke evidence/<uji>/
   lib/queue-status.js   — status queue via RabbitMQ Management API (dipakai server + hasil)
   lib/snapshot.js       — rekamHasil(): snapshot DB + queue + perbandingan ID (dipakai CLI dan API)
@@ -112,7 +113,7 @@ Endpoint yang dibutuhkan:
 
 | Method | Path | Fungsi |
 |--------|------|--------|
-| POST | /api/publish/:kategori | Publish fixtures ke RabbitMQ |
+| POST | /api/publish/:kategori | Bangkitkan event uji (src/lib/events.js) lalu publish ke RabbitMQ |
 | GET  | /api/receipts | Ambil semua receipt dari DB |
 | GET  | /api/rejected | Ambil semua rejected dari DB |
 | GET  | /api/queue-status | Cek status queue via RabbitMQ Management API |
@@ -121,7 +122,7 @@ Endpoint yang dibutuhkan:
 Kategori publish: `normal` (N01–N20), `gangguan` (G01–G05),
 `replay` (N01–N05), `invalid` (X01), `valid_setelah_invalid` (V01)
 
-Data fixtures dibaca dari: `fixtures/events.json`
+Data uji dibangkitkan oleh: `src/lib/events.js` (prefiks run dari `RUN_ID` di .env)
 Publish menggunakan: `amqplib` (sama seperti src/producers/publish.js)
 Koneksi DB: pool dari src/config/index.js
 
@@ -194,7 +195,7 @@ Error lingkungan (DB mati) → `nack(msg, false, true)` (requeue).
 Bedakan dua jenis kegagalan ini.
 
 ### Data sintetis
-Jangan ubah `event_id` di fixtures/events.json.
+Jangan ubah aturan penomoran `event_id` di src/lib/events.js (generator harus tetap deterministik, tanpa acak).
 N01–N05 di kategori `replay` harus PERSIS sama dengan di `normal`.
 Ini kunci keberhasilan U3.
 

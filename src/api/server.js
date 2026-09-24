@@ -1,7 +1,6 @@
 const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
-const fs      = require('fs');
 const amqp    = require('amqplib');
 const {
   RABBITMQ_URL,
@@ -14,28 +13,23 @@ const {
 const { getQueueStatus } = require('../lib/queue-status');
 const { saveInputIds }   = require('../lib/evidence');
 const { rekamHasil }     = require('../lib/snapshot');
+const { KATEGORI, buatEvents } = require('../lib/events');
 
 const PORT = process.env.PORT || 3000;
-
-// Fixtures dibaca sekali saat startup — sama dengan yang dipakai publish.js
-const fixtures = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../../fixtures/events.json'), 'utf8')
-);
-const KATEGORI_VALID = Object.keys(fixtures);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../../public')));
 
-// POST /api/publish/:kategori — publish semua event fixture kategori terkait
+// POST /api/publish/:kategori — bangkitkan dan publish event uji kategori terkait
 app.post('/api/publish/:kategori', async (req, res) => {
   const { kategori } = req.params;
-  const events = fixtures[kategori];
+  const events = buatEvents(kategori, RUN_ID);
 
   if (!events) {
     return res.status(400).json({
-      error: `Kategori tidak dikenal. Pilihan: ${KATEGORI_VALID.join(' | ')}`,
+      error: `Kategori tidak dikenal. Pilihan: ${KATEGORI.join(' | ')}`,
     });
   }
 
@@ -60,10 +54,10 @@ app.post('/api/publish/:kategori', async (req, res) => {
 
     saveInputIds({
       kategori,
-      eventIds: published,
-      source:   'api',
-      command:  `POST /api/publish/${kategori}`,
-      runId:    RUN_ID,
+      events,
+      source:  'api',
+      command: `POST /api/publish/${kategori}`,
+      runId:   RUN_ID,
     });
 
     res.json({ kategori, count: published.length, event_ids: published });

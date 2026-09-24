@@ -38,6 +38,8 @@ src/
   lib/perekam.js        — perekam OTOMATIS: dipanggil server saat publish, memantau queue lalu menyimpan snapshot
                           (U2: sebelum-gangguan / saat-tertahan / sesudah-pemulihan; U4: setelah-x01)
   tools/hasil.js        — CLI manual (cadangan): npm run hasil -- <uji> [tahap]
+  tools/worker-log.js   — npm run worker:log -- <sesi>: jalankan worker + salin log UTF-8 ke evidence/worker-<sesi>.log
+                          (jangan pakai pipa Tee-Object: mengubah ✓ jadi Γ£ô di terminal code page 437)
   (API: GET /api/evidence-log + panel "Evidence Otomatis" di dashboard; TIDAK ada tombol rekam)
 public/
   index.html            — dashboard statis

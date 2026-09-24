@@ -174,7 +174,12 @@ Folder `evidence/` diisi otomatis, dikelompokkan per uji:
 |------|-------------|-----|
 | `evidence/<uji>/input-<kategori>.json` | setiap publish (dashboard maupun CLI) | daftar `event_id` dan isi event yang dikirim, perintah, waktu |
 | `evidence/<uji>/hasil[-<tahap>].json` | **otomatis** oleh server setelah kirim dari dashboard (atau manual `npm run hasil`) | isi tabel receipts/rejected, status queue (ready/unacked/consumers), perbandingan ID diharapkan vs aktual |
-| `evidence/worker-sesi1.log`, `worker-sesi2.log` | `npm run worker` dengan `Tee-Object` | log worker; sesi 1 = sampai worker dimatikan di U2, sesi 2 = setelah dihidupkan lagi |
+| `evidence/worker-sesi1.log`, `worker-sesi2.log` | `npm run worker:log -- <sesi>` | log worker (UTF-8) dengan waktu mulai/selesai; sesi 1 = sampai worker dimatikan di U2, sesi 2 = setelah dihidupkan lagi |
+
+Jalankan worker dengan `npm run worker:log -- sesi1` (menggantikan `npm run worker`
+saat merekam evidence). Outputnya tetap tampil di terminal seperti biasa dan
+disalin ke `evidence/worker-sesi1.log`. Jangan memakai pipa `| Tee-Object`: di
+terminal Windows ber-code page 437 tanda ✓ akan rusak menjadi `Γ£ô`.
 
 ### Otomatis (dashboard)
 
@@ -204,7 +209,7 @@ database). Contohnya:
 
 ```powershell
 # Terminal 1 — worker, log tampil sekaligus tersimpan
-npm run worker 2>&1 | Tee-Object -FilePath evidence/worker-sesi1.log
+npm run worker:log -- sesi1
 # (setelah worker dimatikan di U2 dan dihidupkan lagi, pakai worker-sesi2.log)
 
 # U1: klik "Kirim N01–N20", lalu

@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node --env-file=.env src/api/server.js",
     "worker": "node --env-file=.env src/consumers/worker.js",
+    "worker:log": "node src/tools/worker-log.js",
     "publish": "node --env-file=.env src/producers/publish.js",
     "hasil": "node --env-file=.env src/tools/hasil.js",
     "db:reset": "docker exec -it a09-postgres psql -U a09user -d a09db -c \"TRUNCATE receipts, rejected RESTART IDENTITY;\""

@@ -4,7 +4,7 @@
   "run_id": "run01",
   "source": "api",
   "command": "POST /api/publish/invalid",
-  "published_at": "2026-09-24T11:17:58.831Z",
+  "published_at": "2026-09-24T12:59:09.086Z",
   "count": 1,
   "event_ids": [
     "run01-X01"

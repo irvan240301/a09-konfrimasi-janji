@@ -43,4 +43,4 @@ function saveInputIds({ kategori, events, source, command, runId }) {
   }
 }
 
-module.exports = { EVIDENCE_DIR, writeEvidence, saveInputIds };
+module.exports = { EVIDENCE_DIR, UJI_BY_KATEGORI, writeEvidence, saveInputIds };

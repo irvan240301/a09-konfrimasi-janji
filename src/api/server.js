@@ -12,7 +12,7 @@ const {
 } = require('../config');
 const { getQueueStatus } = require('../lib/queue-status');
 const { saveInputIds }   = require('../lib/evidence');
-const { rekamHasil }     = require('../lib/snapshot');
+const { sebelumPublish, mulaiPemantauan, ambilRiwayat } = require('../lib/perekam');
 const { KATEGORI, buatEvents } = require('../lib/events');
 
 const PORT = process.env.PORT || 3000;
@@ -35,6 +35,8 @@ app.post('/api/publish/:kategori', async (req, res) => {
 
   let conn, ch;
   try {
+    await sebelumPublish(kategori);
+
     conn = await amqp.connect(RABBITMQ_URL);
     ch   = await conn.createConfirmChannel();
     await ch.assertExchange(EXCHANGE, EXCHANGE_TYPE, { durable: true });
@@ -59,6 +61,8 @@ app.post('/api/publish/:kategori', async (req, res) => {
       command: `POST /api/publish/${kategori}`,
       runId:   RUN_ID,
     });
+
+    mulaiPemantauan(kategori);
 
     res.json({ kategori, count: published.length, event_ids: published });
   } catch (err) {
@@ -106,13 +110,9 @@ app.get('/api/queue-status', async (req, res) => {
   }
 });
 
-// POST /api/hasil/:uji?tahap=... — rekam snapshot hasil ke evidence/ (sama dengan npm run hasil)
-app.post('/api/hasil/:uji', async (req, res) => {
-  try {
-    res.json(await rekamHasil(req.params.uji, req.query.tahap, 'api'));
-  } catch (err) {
-    res.status(err.status || 500).json({ error: err.message });
-  }
+// GET /api/evidence-log — riwayat perekaman evidence otomatis (terbaru di atas)
+app.get('/api/evidence-log', (req, res) => {
+  res.json({ rows: ambilRiwayat() });
 });
 
 // POST /api/reset — kosongkan receipts + rejected

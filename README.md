@@ -172,17 +172,35 @@ Folder `evidence/` diisi otomatis, dikelompokkan per uji:
 
 | File | Dibuat oleh | Isi |
 |------|-------------|-----|
-| `evidence/<uji>/input-<kategori>.json` | setiap publish (dashboard maupun CLI) | daftar `event_id` yang dikirim, perintah, waktu |
-| `evidence/<uji>/hasil[-<tahap>].json` | tombol **Rekam** di dashboard **atau** `npm run hasil -- <uji> [tahap]` (hasilnya identik) | isi tabel receipts/rejected, status queue (ready/unacked/consumers), perbandingan ID diharapkan vs aktual |
+| `evidence/<uji>/input-<kategori>.json` | setiap publish (dashboard maupun CLI) | daftar `event_id` dan isi event yang dikirim, perintah, waktu |
+| `evidence/<uji>/hasil[-<tahap>].json` | **otomatis** oleh server setelah kirim dari dashboard (atau manual `npm run hasil`) | isi tabel receipts/rejected, status queue (ready/unacked/consumers), perbandingan ID diharapkan vs aktual |
 | `evidence/worker-sesi1.log`, `worker-sesi2.log` | `npm run worker` dengan `Tee-Object` | log worker; sesi 1 = sampai worker dimatikan di U2, sesi 2 = setelah dihidupkan lagi |
 
-Ada dua cara merekam hasil, pilih salah satu atau campur:
+### Otomatis (dashboard)
 
-- **Dashboard**: setelah uji selesai, klik tombol di panel **Rekam Evidence**
-  (U1, U2 tiga tahap, U3, U4). Ringkasan hasil dan path file tampil di bawah tombol.
-- **CLI**: jalankan `npm run hasil -- <uji> [tahap]`, urutannya di bawah.
+Tidak ada tombol rekam. Server memantau queue setelah tiap kirim dan menyimpan
+snapshot sendiri pada saat yang tepat:
 
-Urutan perekaman dengan CLI (jalankan `hasil` setelah tiap uji selesai):
+| Kirim dari dashboard | Snapshot yang tersimpan otomatis |
+|----------------------|----------------------------------|
+| N01–N20 (U1) | `U1/hasil.json` setelah queue kosong (Ready=0, Unacked=0) |
+| G01–G05 (U2) | `U2/hasil-sebelum-gangguan.json` (sebelum G01–G05 dikirim), `U2/hasil-saat-tertahan.json` (Ready>0, Consumers=0), `U2/hasil-sesudah-pemulihan.json` (worker hidup lagi dan queue kosong) |
+| Replay N01–N05 (U3) | `U3/hasil.json` |
+| X01 (U4) | `U4/hasil-setelah-x01.json` |
+| V01 (U4) | `U4/hasil.json` |
+
+- Statistik queue RabbitMQ diperbarui tiap ±5 detik, jadi snapshot muncul
+  sekitar 6–10 detik setelah kirim.
+- Batas tunggu 60 detik (untuk U2, menunggu pemulihan worker sampai 15 menit).
+  Bila batas tercapai, kondisi terakhir tetap direkam dan ditandai merah.
+- Panel **Evidence Otomatis** di dashboard menampilkan riwayat perekaman.
+- Untuk U2, matikan worker **sebelum** klik "Kirim G01–G05", dan hidupkan lagi
+  setelah snapshot `saat-tertahan` muncul di panel.
+
+### Manual (CLI, cadangan)
+
+`npm run hasil -- <uji> [tahap]` menghasilkan file yang sama (hanya membaca
+database). Contohnya:
 
 ```powershell
 # Terminal 1 — worker, log tampil sekaligus tersimpan

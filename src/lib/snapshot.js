@@ -17,8 +17,13 @@ const EXPECTED = {
   U4: { receipts: [...sampaiU2, ...ids('valid_setelah_invalid')],    rejected: ids('invalid') },
 };
 
-// Pada U2, sebelum pemulihan worker G01-G05 memang belum tersimpan
-const TAHAP_SEBELUM_PEMULIHAN = new Set(['sebelum-gangguan', 'saat-tertahan']);
+// Pada tahap antara, sebagian receipt memang belum diharapkan tersimpan:
+// U2 sebelum pemulihan worker (G01-G05 belum diproses) dan U4 setelah X01 (V01 belum dikirim)
+function receiptsTahapAntara(uji, tahap) {
+  if (uji === 'U2' && (tahap === 'sebelum-gangguan' || tahap === 'saat-tertahan')) return ids('normal');
+  if (uji === 'U4' && tahap === 'setelah-x01') return sampaiU2;
+  return null;
+}
 
 // tahap dipakai sebagai nama file, jadi dibatasi ke huruf/angka/strip
 const TAHAP_VALID = /^[a-z0-9-]+$/i;
@@ -54,9 +59,8 @@ async function rekamHasil(uji, tahap, source = 'cli') {
   }
 
   const diharapkan = { ...EXPECTED[uji] };
-  if (uji === 'U2' && TAHAP_SEBELUM_PEMULIHAN.has(tahap)) {
-    diharapkan.receipts = ids('normal');
-  }
+  const antara = receiptsTahapAntara(uji, tahap);
+  if (antara) diharapkan.receipts = antara;
 
   const receipts = await pool.query(
     `SELECT event_id, appointment_id, customer_id, slot, status, run_id, occurred_at, processed_at
@@ -84,9 +88,9 @@ async function rekamHasil(uji, tahap, source = 'cli') {
     tahap:       tahap ?? null,
     run_id:      RUN_ID,
     source,
-    command:     source === 'api'
-      ? `POST /api/hasil/${uji}${tahap ? '?tahap=' + tahap : ''}`
-      : `npm run hasil -- ${[uji, tahap].filter(Boolean).join(' ')}`,
+    command:     source === 'cli'
+      ? `npm run hasil -- ${[uji, tahap].filter(Boolean).join(' ')}`
+      : 'rekam otomatis oleh server setelah publish',
     captured_at: new Date().toISOString(),
     queue,
     receipts:    { count: receipts.rowCount, rows: receipts.rows },

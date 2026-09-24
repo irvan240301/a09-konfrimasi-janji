@@ -34,9 +34,11 @@ src/
   lib/events.js         — generator data uji sintetis (pengganti fixtures/events.json)
   lib/evidence.js       — tulis input-<kategori>.json ke evidence/<uji>/
   lib/queue-status.js   — status queue via RabbitMQ Management API (dipakai server + hasil)
-  lib/snapshot.js       — rekamHasil(): snapshot DB + queue + perbandingan ID (dipakai CLI dan API)
-  tools/hasil.js        — CLI: npm run hasil -- <uji> [tahap]
-  (API: POST /api/hasil/:uji?tahap=... + panel "Rekam Evidence" di dashboard)
+  lib/snapshot.js       — rekamHasil(): snapshot DB + queue + perbandingan ID (dipakai perekam dan CLI)
+  lib/perekam.js        — perekam OTOMATIS: dipanggil server saat publish, memantau queue lalu menyimpan snapshot
+                          (U2: sebelum-gangguan / saat-tertahan / sesudah-pemulihan; U4: setelah-x01)
+  tools/hasil.js        — CLI manual (cadangan): npm run hasil -- <uji> [tahap]
+  (API: GET /api/evidence-log + panel "Evidence Otomatis" di dashboard; TIDAK ada tombol rekam)
 public/
   index.html            — dashboard statis
 ```
